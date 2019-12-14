@@ -80,7 +80,9 @@ public class RobotServiceImpl implements RobotService {
 	}
 
 	private double calculateWithWeightAndKM(double robotCarryWeight) {
-		return ((100 + robotExtraBatteryConsumpPerKg) / (robotWalkKMPerBattery * 1000)) * robotCarryWeight;
+		double totalReqBattery = 100 + (robotExtraBatteryConsumpPerKg * robotCarryWeight);
+		double batteryConsumPerKm = (totalReqBattery / robotWalkKMPerBattery);
+		return (batteryConsumPerKm / 1000);
 	}
 
 	private String validateWeight(double robotWalkPerKM, double robotCarryWeight) {
